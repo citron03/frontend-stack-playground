@@ -1,5 +1,4 @@
 const path = require('path');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
@@ -41,7 +40,6 @@ module.exports = {
   },
   plugins: [
     // webpack 추가 기능 확장
-    new LoaderOptionsPlugin({ debug: true }),
     new ReactRefreshWebpackPlugin(),
   ],
   output: {
@@ -55,6 +53,7 @@ module.exports = {
     // hot loader 기능 추가 - 메모리에 결과물을 저장, 변경 사항을 감시하여 발견시 결과물 실시간 수정
     devMiddleware: { publicPath: '/dist' }, // 결과물 위치
     hot: true,
+    open: true, // 서버 시작시 자동으로 브라우저 오픈
     static: { directory: path.resolve(__dirname) }, // 실제 static 파일 위치 (ex. index.html)
   },
 };
