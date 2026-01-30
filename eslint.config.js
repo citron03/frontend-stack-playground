@@ -34,6 +34,7 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
+        ...globals.node,
         ...globals.browser,
         window: 'readonly',
         document: 'readonly',
