@@ -33,11 +33,7 @@ module.exports = {
             '@babel/preset-react',
             '@babel/preset-typescript',
           ],
-          plugins: [
-            ['@babel/plugin-transform-arrow-functions', { spec: true }],
-            'react-refresh/babel',
-            '@babel/plugin-proposal-class-properties',
-          ], // plugins들의 모음이 presets이다.
+          plugins: ['react-refresh/babel'],
         },
         exclude: path.join(__dirname, 'node_modules'),
       },
