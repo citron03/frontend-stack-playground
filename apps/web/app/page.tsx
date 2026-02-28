@@ -29,6 +29,7 @@ export default function Home() {
       <Link href="/index-db-test">IndexDB Page</Link>
       <Link href="/events-demo">React Event Wrapper Page</Link>
       <Link href="/activity-demo">React Activity Test Page</Link>
+      <Link href="/submodule-colors">Submodule Colors Demo</Link>
       <div>
         <InstallButton />
       </div>

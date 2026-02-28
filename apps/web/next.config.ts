@@ -1,6 +1,5 @@
 import withMdxCreate from '@next/mdx';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
-import type { NextConfig } from 'next';
 
 const withMDX = withMdxCreate({
   // Optionally provide remark and rehype plugins
@@ -16,10 +15,12 @@ const withMDX = withMdxCreate({
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
   reactCompiler: true,
-  experimental: {},
+  experimental: {
+    externalDir: true,
+  },
   // useEffect 두 번 실행 방지
   reactStrictMode: false,
 };
