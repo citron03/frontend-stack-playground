@@ -22,7 +22,8 @@
     "tui-grid": "4.21.22",
     "valtio": "2.2.0",
     "xstate": "5.24.0",
-    "@citron03/design-system": "workspace:*"
+    "@citron03/design-system": "workspace:*",
+    "@citron03/event-bus": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "catalog:testing",

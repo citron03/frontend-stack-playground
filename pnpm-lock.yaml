@@ -415,6 +415,19 @@ importers:
         specifier: catalog:utilities
         version: 5.4.21(@types/node@24.10.1)(lightningcss@1.30.2)(terser@5.44.1)
 
+  apps/event-bus:
+    dependencies:
+      react:
+        specifier: catalog:framework
+        version: 19.0.0-rc.0
+      react-dom:
+        specifier: catalog:framework
+        version: 19.0.0-rc.0(react@19.0.0-rc.0)
+    devDependencies:
+      typescript:
+        specifier: catalog:types
+        version: 5.4.5
+
   apps/scripts:
     dependencies:
       chalk:
@@ -517,6 +530,9 @@ importers:
       '@citron03/design-system':
         specifier: workspace:*
         version: link:../design-system
+      '@citron03/event-bus':
+        specifier: workspace:*
+        version: link:../event-bus
       '@loadable/component':
         specifier: catalog:utilities
         version: 5.16.7(react@19.0.0-rc.0)
