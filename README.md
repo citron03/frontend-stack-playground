@@ -8,6 +8,8 @@
   - `web`: 메인 Next.js 애플리케이션입니다.
 - `packages`: 여러 앱에서 사용할 수 있는 공유 라이브러리, 컴포넌트 또는 유틸리티를 포함합니다.
   - (이 디렉토리에 새 패키지를 추가할 수 있습니다.)
+- `vendor`: Git Submodule 형태의 외부 저장소를 포함합니다.
+  - `colors-helper-tools`: 색상 관련 유틸 함수 저장소(서브모듈)입니다.
 
 ## 주요 기술
 
@@ -23,6 +25,19 @@
 
 ```bash
 pnpm install
+```
+
+서브모듈까지 포함해서 처음 클론할 때는 아래 명령을 권장합니다.
+
+```bash
+git clone --recurse-submodules <repo-url>
+```
+
+이미 클론한 레포라면 다음을 1회 실행하세요.
+
+```bash
+git submodule init
+git submodule update
 ```
 
 ### 2. 개발
@@ -72,6 +87,32 @@ pnpm test
     ```
 
 5.  루트에서 `pnpm install`을 실행하여 새 패키지를 연결합니다.
+
+## Git Submodule 운영 가이드
+
+현재 이 레포에는 `vendor/colors-helper-tools` 서브모듈이 연결되어 있습니다.
+
+```bash
+git submodule status
+```
+
+서브모듈 최신 커밋 반영 방법:
+
+```bash
+cd vendor/colors-helper-tools
+git pull origin main
+cd ../..
+git add vendor/colors-helper-tools
+git commit -m "Update colors-helper-tools submodule"
+```
+
+현재 `.gitmodules` URL은 `https://github.com/citron03/colors-helper-tools.git` 입니다.  
+다른 저장소를 사용하려면 아래 명령으로 변경하세요.
+
+```bash
+git submodule set-url vendor/colors-helper-tools <your-remote-repo-url>
+git submodule sync --recursive
+```
 
 ## Blog / 블로그
 
