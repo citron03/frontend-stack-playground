@@ -3,6 +3,11 @@
 이 파일은 이 모노레포에서 작업할 때의 기본 규칙과 맥락을 정의한다.
 Claude는 작업 시작 시 이 문서를 우선 참고한다.
 
+## 우선 참고 문서
+- `docs/README.md`: 프로젝트 문서 인덱스
+- `docs/PROJECT_CONVENTIONS.md`: 저장소 전체 통일 코딩/구조/패턴/주석/리뷰 규약 (다인 협업 표준)
+- `docs/PROJECT_AUDIT_REPORT.md`: 현재 프로젝트 구조/의존성 정밀 분석 보고서
+
 ## 프로젝트 요약
 - pnpm 워크스페이스 + Turborepo 기반 모노레포
 - 주요 앱: Next.js 앱(`apps/web`), TanStack + Vite 앱(`apps/tanstack`), 디자인 시스템(`apps/design-system`), Webpack 샘플(`apps/webpack`)
