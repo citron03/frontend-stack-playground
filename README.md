@@ -2,6 +2,12 @@
 
 이 프로젝트는 pnpm 워크스페이스와 Turborepo를 사용하여 모노레포로 재구성되었습니다.
 
+## 협업 표준 문서
+
+- `docs/README.md`: 프로젝트 문서 인덱스
+- `docs/PROJECT_CONVENTIONS.md`: 코드/디렉토리/패턴/주석/테스트/리뷰 통일 규약
+- `docs/PROJECT_AUDIT_REPORT.md`: 현재 구조 및 외부 패키지 정밀 분석 보고서
+
 ## 구조
 
 - `apps`: 개별 애플리케이션을 포함합니다.
