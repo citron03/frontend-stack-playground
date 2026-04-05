@@ -1,4 +1,4 @@
-// ! use git-bash
+// 실행 환경: Windows + Git Bash/PowerShell
 import { $, chalk, echo } from 'zx';
 
 async function commandExists(cmd) {
