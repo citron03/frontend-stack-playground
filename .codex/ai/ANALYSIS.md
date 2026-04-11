@@ -4,7 +4,7 @@
 
 ## 프로젝트 특성 요약
 - monorepo: pnpm workspace + turbo
-- 앱 축: web(Next), tanstack(Vite), design-system(Storybook), webpack 샘플
+- 앱 축: design-system, event-bus, scripts, tanstack, web, webpack
 - 운영 문서: docs/*에 구조/테스트/보안/의존성 규약 명시
 
 ## 보안 기준

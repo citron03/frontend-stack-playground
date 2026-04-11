@@ -5,11 +5,12 @@
     "packageManager": "pnpm",
     "monorepo": true,
     "apps": [
-      "web",
-      "tanstack",
       "design-system",
-      "webpack",
-      "scripts"
+      "event-bus",
+      "scripts",
+      "tanstack",
+      "web",
+      "webpack"
     ]
   },
   "guardrails": {

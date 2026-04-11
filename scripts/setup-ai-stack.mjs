@@ -14,7 +14,7 @@ const syncScript = path.join(rootDir, 'scripts', 'sync-ai-config.mjs');
 const checkOnly = process.argv.includes('--check');
 
 const requiredCommands = ['node', 'pnpm', 'git', 'rg'];
-const blockedTokens = ['curl', 'wget', 'http://', 'https://', 'ssh://'];
+const blockedTokens = ['curl', 'wget', 'http://', 'https://', 'ssh://', ';', '&&', '||', '|'];
 
 const mcpPolicy = {
   version: 1,
@@ -48,7 +48,7 @@ const mcpPolicy = {
       purpose: '빠른 탐색/정적 분석',
       enabled: true,
       readOnly: true,
-      allowedCommands: ['rg', 'find', 'sed', 'cat', 'ls', 'pnpm --filter <app> test'],
+      allowedCommands: ['rg', 'find', 'sed', 'cat', 'ls'],
     },
   ],
 };
@@ -109,29 +109,33 @@ const multiAgentPolicy = {
   ],
 };
 
-const aiSettings = {
-  version: 1,
-  project: {
-    name: 'practice-next-15',
-    packageManager: 'pnpm',
-    monorepo: true,
-    apps: ['web', 'tanstack', 'design-system', 'webpack', 'scripts'],
-  },
-  guardrails: {
-    strictTypeScript: true,
-    testStrategy: 'app-scoped-first',
-    dependencyPolicy: 'no-latest-no-unknown-remote',
-    docsFirst: ['docs/PROJECT_CONVENTIONS.md', 'docs/ARCHITECTURE.md'],
-  },
-};
+function buildAiSettings(projectName, packageManager, appNames) {
+  return {
+    version: 1,
+    project: {
+      name: projectName,
+      packageManager,
+      monorepo: true,
+      apps: appNames,
+    },
+    guardrails: {
+      strictTypeScript: true,
+      testStrategy: 'app-scoped-first',
+      dependencyPolicy: 'no-latest-no-unknown-remote',
+      docsFirst: ['docs/PROJECT_CONVENTIONS.md', 'docs/ARCHITECTURE.md'],
+    },
+  };
+}
 
-const analysisReport = `# AI Stack Analysis
+function buildAnalysisReport(appNames) {
+  const appLine = appNames.length > 0 ? appNames.join(', ') : 'apps 디렉토리에서 앱을 찾지 못함';
+  return `# AI Stack Analysis
 
 작성일: managed-by-ai-setup-stack
 
 ## 프로젝트 특성 요약
 - monorepo: pnpm workspace + turbo
-- 앱 축: web(Next), tanstack(Vite), design-system(Storybook), webpack 샘플
+- 앱 축: ${appLine}
 - 운영 문서: docs/*에 구조/테스트/보안/의존성 규약 명시
 
 ## 보안 기준
@@ -145,6 +149,7 @@ const analysisReport = `# AI Stack Analysis
 - sync-ai-config를 통해 .codex/CODEX.md 동기화
 - ai-setup 스킬/커맨드 제공
 `;
+}
 
 async function ensureDir(dirPath) {
   await fs.mkdir(dirPath, { recursive: true });
@@ -182,7 +187,48 @@ function validatePolicyCommands(commands) {
   return commands.every((cmd) => blockedTokens.every((token) => !cmd.includes(token)));
 }
 
+async function loadProjectMetadata() {
+  const packageJsonPath = path.join(rootDir, 'package.json');
+  const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+  const appsDir = path.join(rootDir, 'apps');
+  const appsEntries = await fs.readdir(appsDir, { withFileTypes: true }).catch(() => []);
+  const appNames = appsEntries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+
+  const packageManager = typeof packageJson.packageManager === 'string'
+    ? packageJson.packageManager.split('@')[0]
+    : 'pnpm';
+
+  const projectName = typeof packageJson.name === 'string' && packageJson.name.length > 0
+    ? packageJson.name
+    : path.basename(rootDir);
+
+  const scripts = typeof packageJson.scripts === 'object' && packageJson.scripts !== null
+    ? packageJson.scripts
+    : {};
+
+  return { projectName, packageManager, appNames, scripts };
+}
+
+function deriveTestCommands(scripts) {
+  const preferred = ['web:test', 'tanstack:test', 'ds:test', 'test'];
+  return preferred.filter((key) => typeof scripts[key] === 'string').map((key) => `pnpm ${key}`);
+}
+
 async function run() {
+  const { projectName, packageManager, appNames, scripts } = await loadProjectMetadata();
+  const aiSettings = buildAiSettings(projectName, packageManager, appNames);
+  const analysisReport = buildAnalysisReport(appNames);
+  const derivedTestCommands = deriveTestCommands(scripts);
+  if (derivedTestCommands.length > 0) {
+    const shellPolicy = mcpPolicy.servers.find((server) => server.id === 'shell-safe-readonly');
+    if (shellPolicy) {
+      shellPolicy.allowedCommands = [...shellPolicy.allowedCommands, ...derivedTestCommands];
+    }
+  }
+
   const missing = [];
   for (const cmd of requiredCommands) {
     if (!(await commandExists(cmd))) {
@@ -195,8 +241,14 @@ async function run() {
   }
 
   const allPluginCommands = pluginPolicy.plugins.flatMap((plugin) => plugin.commands);
-  if (!validatePolicyCommands(allPluginCommands)) {
-    throw new Error('plugin policy contains blocked remote/network command token');
+  const allMcpCommands = mcpPolicy.servers.flatMap((server) => [
+    ...(server.allowedCommands ?? []),
+    ...(server.allowedGitCommands ?? []),
+  ]);
+  const allPolicyCommands = [...allPluginCommands, ...allMcpCommands];
+
+  if (!validatePolicyCommands(allPolicyCommands)) {
+    throw new Error('policy contains blocked remote/network command token');
   }
 
   await ensureDir(aiDir);

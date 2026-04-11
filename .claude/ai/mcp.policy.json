@@ -46,7 +46,9 @@
         "sed",
         "cat",
         "ls",
-        "pnpm --filter <app> test"
+        "pnpm tanstack:test",
+        "pnpm ds:test",
+        "pnpm test"
       ]
     }
   ]
