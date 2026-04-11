@@ -41,9 +41,9 @@
 - 이유: 장기 유지보수성/리팩터링 안정성 확보
 
 ## ADR-008: latest 태그 최소화
-- 상태: Proposed
-- 대상: `apps/tanstack`의 `nitro: latest`
-- 제안: 고정 버전으로 전환
+- 상태: Accepted
+- 대상: `apps/tanstack`의 `nitro` 버전
+- 결정: `latest`에서 `3.0.260311-beta`로 고정
 - 이유: 재현 가능한 빌드/디버깅
 
 ## ADR-009: 공유 코드 수용 경로 고정

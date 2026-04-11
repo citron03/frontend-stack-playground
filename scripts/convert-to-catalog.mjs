@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// 실행 환경: Node.js (macOS/Linux/Windows 공통)
 import { promises as fs } from 'fs';
 import yaml from 'js-yaml';
 import path from 'path';

@@ -1,6 +1,7 @@
 # ARCHITECTURE
 
 작성일: 2026-04-04
+최종 갱신: 2026-04-12
 
 ## 1. 시스템 개요
 이 저장소는 `pnpm workspace + Turborepo` 기반 모노레포이며, 단일 제품보다 "실험/학습/검증" 성격이 강한 멀티앱 구조다.
@@ -56,7 +57,7 @@
 
 ## 5. 구조 리스크
 - React 버전 축 이원화(`web`: 19 RC, `tanstack`: 19.2)
-- `apps/tanstack`의 `nitro: latest` 재현성 리스크
+- `apps/tanstack`의 `nitro`가 beta 고정 버전(`3.0.260311-beta`)이라 장기 안정 버전 전략 검토 필요
 - 서브모듈 직접 import는 경계 약화 가능성 있음
 
 ## 6. 타깃 상태

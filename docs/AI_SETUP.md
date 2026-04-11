@@ -21,3 +21,4 @@
 - `.codex`, `CODEX.md`는 수동 편집하지 않는다.
 - 변경이 필요하면 `.claude` 또는 `CLAUDE.md`를 수정하고 동기화를 다시 실행한다.
 - MCP/플러그인/멀티에이전트 정책은 `.claude/ai/*`를 기준으로 관리한다.
+- 앱 문서는 `apps/docs`가 아니라 각 앱의 `apps/<name>/README.md`를 기준으로 관리한다.

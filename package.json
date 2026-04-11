@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "clean": "rm -rf node_modules apps/*/node_modules apps/*/.next apps/*/dist apps/*/build .turbo",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "pnpm --filter web exec tsc --noEmit && pnpm --filter tanstack-temp exec tsc --noEmit && pnpm --filter @citron03/design-system exec tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "stylelint": "stylelint \"**/*.css\"",
