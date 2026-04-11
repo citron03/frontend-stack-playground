@@ -2,6 +2,12 @@
 
 작성일: 2026-04-04 (Asia/Seoul)
 
+> 갱신 메모 (2026-04-12):
+> - 이 문서는 2026-04-04 시점 스냅샷입니다.
+> - 현재 `apps/tanstack`의 `nitro`는 `latest`가 아니라 `3.0.260311-beta`로 고정되어 있습니다.
+> - `apps/event-bus` 디렉토리는 존재하지만 `package.json`이 없어 실행 단위 앱으로는 간주하지 않습니다.
+> - 최신 AI 설정 기준에서 앱 식별 규칙은 `apps/<name>/package.json` 존재 여부입니다.
+
 ## 1) 분석 범위와 방법
 - 분석 기준 파일셋: `git ls-files` 기준 추적 파일 전체
 - 총 추적 파일 수: 149개
@@ -162,9 +168,9 @@ importer별 직접 의존성 개수:
 - React 버전 축이 두 갈래로 공존
   - web/root는 React 19 RC 축
   - tanstack은 React 19.2.0 축
-- `apps/tanstack`의 `nitro: latest`는 재현성 리스크(잠재적 빌드 변화)
+- `apps/tanstack`의 `nitro`는 `3.0.260311-beta`로 고정되어 있으며, beta 채널 유지 리스크가 존재
 - `pnpm list` 결과에서 `apps/web`에 `unsavedDependencies`로 `@citron03/event-bus` 링크 흔적이 보임
-  - 현재 tracked 파일셋에는 `apps/event-bus` 패키지 정의가 없음
+  - `apps/event-bus` 디렉토리는 존재하지만 `package.json`이 없어 실행 앱으로는 간주되지 않음
   - 로컬 설치 상태와 선언 상태 불일치 가능성 점검 필요
 - `apps/web/app/components/*` 일부에서 `any` 사용 존재(타입 엄격도 저하)
 
@@ -179,7 +185,7 @@ importer별 직접 의존성 개수:
 - 프로젝트는 모노레포 운영 구조가 명확하고, 데모성 기능이 풍부하며, 도구 체인이 강하게 구성되어 있음
 - 의존성 측면에서 즉시 장애성 문제는 없지만 아래 3가지는 추후 정리 가치가 큼:
   - React 버전 축 정렬 전략 수립
-  - `nitro: latest` 고정 버전화
+  - `nitro` beta 고정 버전의 안정화/승격 전략 수립
   - `unsavedDependencies` 상태 정리
 
 ---

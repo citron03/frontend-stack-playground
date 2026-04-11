@@ -209,10 +209,16 @@ async function loadProjectMetadata() {
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
   const appsDir = path.join(rootDir, 'apps');
   const appsEntries = await fs.readdir(appsDir, { withFileTypes: true }).catch(() => []);
-  const appNames = appsEntries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort();
+  const appCandidates = appsEntries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+  const appNames = [];
+  for (const appName of appCandidates) {
+    const appPackageJson = path.join(appsDir, appName, 'package.json');
+    // 앱으로 간주되는 기준: apps/<name>/package.json 존재
+    if (await fs.access(appPackageJson).then(() => true).catch(() => false)) {
+      appNames.push(appName);
+    }
+  }
+  appNames.sort();
 
   const packageManager = typeof packageJson.packageManager === 'string'
     ? packageJson.packageManager.split('@')[0]

@@ -219,8 +219,8 @@
 
 ## 13. 즉시 적용 항목 (현재 레포 기준)
 - `apps/web` 내 `any` 사용 지점 점진 제거
-- `apps/tanstack`의 `nitro: latest` 버전 고정 검토
-- 로컬에만 존재하는 비추적 앱/디렉토리(`apps/event-bus` 등) 정리 정책 확정
+- `apps/tanstack`의 `nitro` beta 고정 버전 안정화 전략(정식/고정 정책) 수립
+- `apps/event-bus`는 현재 `package.json` 없는 미완성 디렉토리이므로 앱 등록 기준(`apps/<name>/package.json`)에 맞춰 정리
 - 테스트 커버리지 최소선(핵심 라우트 기준) 수립
 
 ---

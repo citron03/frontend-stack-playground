@@ -6,7 +6,6 @@
     "monorepo": true,
     "apps": [
       "design-system",
-      "event-bus",
       "scripts",
       "tanstack",
       "web",
