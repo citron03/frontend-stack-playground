@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "securityBaseline": {
+    "networkAccess": "deny-by-default",
+    "secretHandling": "env-only",
+    "filesystemScope": "workspace-only",
+    "vendorWrite": false,
+    "patchesWrite": false
+  },
+  "servers": [
+    {
+      "id": "workspace-files-readonly",
+      "kind": "local-policy",
+      "purpose": "프로젝트 코드/문서 조회",
+      "enabled": true,
+      "readOnly": true,
+      "allowedPaths": [
+        "apps/**",
+        "docs/**",
+        "scripts/**",
+        ".claude/**"
+      ]
+    },
+    {
+      "id": "git-metadata-readonly",
+      "kind": "local-policy",
+      "purpose": "변경점/이력 확인",
+      "enabled": true,
+      "readOnly": true,
+      "allowedGitCommands": [
+        "git status",
+        "git diff",
+        "git log --oneline",
+        "git show"
+      ]
+    },
+    {
+      "id": "shell-safe-readonly",
+      "kind": "local-policy",
+      "purpose": "빠른 탐색/정적 분석",
+      "enabled": true,
+      "readOnly": true,
+      "allowedCommands": [
+        "rg",
+        "find",
+        "sed -n",
+        "cat",
+        "ls"
+      ]
+    },
+    {
+      "id": "test-execution-readonly",
+      "kind": "local-policy",
+      "purpose": "테스트 실행 및 검증",
+      "enabled": true,
+      "readOnly": true,
+      "allowedCommands": [
+        "pnpm tanstack:test",
+        "pnpm ds:test",
+        "pnpm test"
+      ]
+    }
+  ]
+}
