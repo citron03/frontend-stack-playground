@@ -43,9 +43,18 @@
       "allowedCommands": [
         "rg",
         "find",
-        "sed",
+        "sed -n",
         "cat",
-        "ls",
+        "ls"
+      ]
+    },
+    {
+      "id": "test-execution-readonly",
+      "kind": "local-policy",
+      "purpose": "테스트 실행 및 검증",
+      "enabled": true,
+      "readOnly": true,
+      "allowedCommands": [
         "pnpm tanstack:test",
         "pnpm ds:test",
         "pnpm test"

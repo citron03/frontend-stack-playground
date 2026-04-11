@@ -16,7 +16,7 @@ const checkOnly = process.argv.includes('--check');
 const requiredCommands = ['node', 'pnpm', 'git', 'rg'];
 const blockedTokens = ['curl', 'wget', 'http://', 'https://', 'ssh://', ';', '&&', '||', '|'];
 
-const mcpPolicy = {
+const baseMcpPolicy = {
   version: 1,
   securityBaseline: {
     networkAccess: 'deny-by-default',
@@ -48,7 +48,7 @@ const mcpPolicy = {
       purpose: '빠른 탐색/정적 분석',
       enabled: true,
       readOnly: true,
-      allowedCommands: ['rg', 'find', 'sed', 'cat', 'ls'],
+      allowedCommands: ['rg', 'find', 'sed -n', 'cat', 'ls'],
     },
   ],
 };
@@ -187,6 +187,23 @@ function validatePolicyCommands(commands) {
   return commands.every((cmd) => blockedTokens.every((token) => !cmd.includes(token)));
 }
 
+function validatePolicySafety(mcpPolicy) {
+  const dangerousCommands = mcpPolicy.servers.flatMap((server) => {
+    const commands = [...(server.allowedCommands ?? []), ...(server.allowedGitCommands ?? [])];
+    return commands.map((command) => ({ command, readOnly: server.readOnly !== false }));
+  });
+
+  for (const { command, readOnly } of dangerousCommands) {
+    if (command.startsWith('sed') && command !== 'sed -n') {
+      throw new Error('only "sed -n" is allowed in MCP policy');
+    }
+
+    if (!readOnly && (command.startsWith('sed') || command.startsWith('pnpm'))) {
+      throw new Error('write-capable MCP server cannot include sed/pnpm commands');
+    }
+  }
+}
+
 async function loadProjectMetadata() {
   const packageJsonPath = path.join(rootDir, 'package.json');
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
@@ -221,12 +238,17 @@ async function run() {
   const { projectName, packageManager, appNames, scripts } = await loadProjectMetadata();
   const aiSettings = buildAiSettings(projectName, packageManager, appNames);
   const analysisReport = buildAnalysisReport(appNames);
+  const mcpPolicy = JSON.parse(JSON.stringify(baseMcpPolicy));
   const derivedTestCommands = deriveTestCommands(scripts);
   if (derivedTestCommands.length > 0) {
-    const shellPolicy = mcpPolicy.servers.find((server) => server.id === 'shell-safe-readonly');
-    if (shellPolicy) {
-      shellPolicy.allowedCommands = [...shellPolicy.allowedCommands, ...derivedTestCommands];
-    }
+    mcpPolicy.servers.push({
+      id: 'test-execution-readonly',
+      kind: 'local-policy',
+      purpose: '테스트 실행 및 검증',
+      enabled: true,
+      readOnly: true,
+      allowedCommands: derivedTestCommands,
+    });
   }
 
   const missing = [];
@@ -250,6 +272,8 @@ async function run() {
   if (!validatePolicyCommands(allPolicyCommands)) {
     throw new Error('policy contains blocked remote/network command token');
   }
+
+  validatePolicySafety(mcpPolicy);
 
   await ensureDir(aiDir);
 
