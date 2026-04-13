@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { useCallback, useState } from 'react';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
+import { validateTodoInput } from '@/data/todo.validation';
 
 /*
 const loggingMiddleware = createMiddleware().server(
@@ -39,7 +40,7 @@ const getTodos = createServerFn({
 }).handler(async () => await readTodos());
 
 const addTodo = createServerFn({ method: 'POST' })
-  .inputValidator((d: string) => d)
+  .inputValidator((input: unknown) => validateTodoInput(input))
   .handler(async ({ data }) => {
     const todos = await readTodos();
     todos.push({ id: todos.length + 1, name: data });

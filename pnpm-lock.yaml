@@ -123,14 +123,14 @@ catalogs:
       specifier: 20.17.13
       version: 20.17.13
     '@types/react':
-      specifier: 19.0.7
-      version: 19.0.7
+      specifier: 19.2.5
+      version: 19.2.5
     '@types/react-color':
       specifier: 3.0.13
       version: 3.0.13
     '@types/react-dom':
-      specifier: 19.0.3
-      version: 19.0.3
+      specifier: 19.2.3
+      version: 19.2.3
     typescript:
       specifier: 5.4.5
       version: 5.4.5
@@ -454,7 +454,7 @@ importers:
         specifier: ^0.544.0
         version: 0.544.0(react@19.2.0)
       nitro:
-        specifier: latest
+        specifier: 3.0.260311-beta
         version: 3.0.260311-beta(chokidar@4.0.3)(giget@1.2.5)(jiti@1.21.7)(rollup@4.53.2)(vite@7.2.2(@types/node@22.19.2)(jiti@1.21.7)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.1))
       react:
         specifier: ^19.2.0
@@ -531,10 +531,10 @@ importers:
         version: 3.1.0(webpack@5.104.1(esbuild@0.25.12))
       '@mdx-js/react':
         specifier: catalog:mdx
-        version: 3.1.0(@types/react@19.0.7)(react@19.0.0-rc.0)
+        version: 3.1.0(@types/react@19.2.5)(react@19.0.0-rc.0)
       '@next/mdx':
         specifier: catalog:mdx
-        version: 15.5.7(@mdx-js/loader@3.1.0(webpack@5.104.1(esbuild@0.25.12)))(@mdx-js/react@3.1.0(@types/react@19.0.7)(react@19.0.0-rc.0))
+        version: 15.5.7(@mdx-js/loader@3.1.0(webpack@5.104.1(esbuild@0.25.12)))(@mdx-js/react@3.1.0(@types/react@19.2.5)(react@19.0.0-rc.0))
       '@vanilla-extract/css':
         specifier: catalog:vanilla-extract
         version: 1.15.1
@@ -543,7 +543,7 @@ importers:
         version: 0.5.7(@vanilla-extract/css@1.15.1)
       '@xstate/react':
         specifier: 6.0.0
-        version: 6.0.0(@types/react@19.0.7)(react@19.0.0-rc.0)(xstate@5.24.0)
+        version: 6.0.0(@types/react@19.2.5)(react@19.0.0-rc.0)(xstate@5.24.0)
       next:
         specifier: catalog:framework
         version: 15.5.7(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -558,7 +558,7 @@ importers:
         version: 4.21.22(patch_hash=4b3217265fc03cc0453b2424330767f075304ed32208430e3f4d3c73279df85b)
       valtio:
         specifier: 2.2.0
-        version: 2.2.0(@types/react@19.0.7)(react@19.0.0-rc.0)
+        version: 2.2.0(@types/react@19.2.5)(react@19.0.0-rc.0)
       xstate:
         specifier: 5.24.0
         version: 5.24.0
@@ -568,7 +568,7 @@ importers:
         version: 6.8.0
       '@testing-library/react':
         specifier: catalog:testing
-        version: 16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+        version: 16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       '@testing-library/user-event':
         specifier: catalog:testing
         version: 14.6.1(@testing-library/dom@10.4.0)
@@ -583,10 +583,10 @@ importers:
         version: 20.17.13
       '@types/react':
         specifier: catalog:types
-        version: 19.0.7
+        version: 19.2.5
       '@types/react-dom':
         specifier: catalog:types
-        version: 19.0.3(@types/react@19.0.7)
+        version: 19.2.3(@types/react@19.2.5)
       '@typescript-eslint/eslint-plugin':
         specifier: catalog:eslint
         version: 8.40.0(@typescript-eslint/parser@8.40.0(eslint@9.34.0(jiti@2.6.1))(typescript@5.4.5))(eslint@9.34.0(jiti@2.6.1))(typescript@5.4.5)
@@ -3544,18 +3544,10 @@ packages:
     peerDependencies:
       '@types/react': '*'
 
-  '@types/react-dom@19.0.3':
-    resolution: {integrity: sha512-0Knk+HJiMP/qOZgMyNFamlIjw9OFCsyC2ZbigmEEyXXixgre6IQpm/4V+r3qH4GC1JPvRJKInw+on2rV6YZLeA==}
-    peerDependencies:
-      '@types/react': ^19.0.0
-
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
-
-  '@types/react@19.0.7':
-    resolution: {integrity: sha512-MoFsEJKkAtZCrC1r6CM8U22GzhG7u2Wir8ons/aCKH6MBdD1ibV24zOSSkdZVUKqN5i396zG5VKLYZ3yaUZdLA==}
 
   '@types/react@19.2.5':
     resolution: {integrity: sha512-keKxkZMqnDicuvFoJbzrhbtdLSPhj/rZThDlKWCDbgXmUg0rEUFtRssDXKYmtXluZlIqiC5VqkCgRwzuyLHKHw==}
@@ -10751,10 +10743,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.0(@types/react@19.0.7)(react@19.0.0-rc.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.2.5)(react@19.0.0-rc.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.0.7
+      '@types/react': 19.2.5
       react: 19.0.0-rc.0
 
   '@mdx-js/react@3.1.1(@types/react@19.2.5)(react@19.0.0-rc.0)':
@@ -10789,12 +10781,12 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.5.7(@mdx-js/loader@3.1.0(webpack@5.104.1(esbuild@0.25.12)))(@mdx-js/react@3.1.0(@types/react@19.0.7)(react@19.0.0-rc.0))':
+  '@next/mdx@15.5.7(@mdx-js/loader@3.1.0(webpack@5.104.1(esbuild@0.25.12)))(@mdx-js/react@3.1.0(@types/react@19.2.5)(react@19.0.0-rc.0))':
     dependencies:
       source-map: 0.7.6
     optionalDependencies:
       '@mdx-js/loader': 3.1.0(webpack@5.104.1(esbuild@0.25.12))
-      '@mdx-js/react': 3.1.0(@types/react@19.0.7)(react@19.0.0-rc.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.2.5)(react@19.0.0-rc.0)
 
   '@next/mdx@15.5.7(@mdx-js/loader@3.1.1(webpack@5.104.1(esbuild@0.25.12)))(@mdx-js/react@3.1.1(@types/react@19.2.5)(react@19.0.0-rc.0))':
     dependencies:
@@ -11899,16 +11891,6 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/react@16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-    dependencies:
-      '@babel/runtime': 7.28.4
-      '@testing-library/dom': 10.4.0
-      react: 19.0.0-rc.0
-      react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-    optionalDependencies:
-      '@types/react': 19.0.7
-      '@types/react-dom': 19.0.3(@types/react@19.0.7)
-
   '@testing-library/react@16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -12094,17 +12076,9 @@ snapshots:
       '@types/react': 19.2.5
       '@types/reactcss': 1.2.13(@types/react@19.2.5)
 
-  '@types/react-dom@19.0.3(@types/react@19.0.7)':
-    dependencies:
-      '@types/react': 19.0.7
-
   '@types/react-dom@19.2.3(@types/react@19.2.5)':
     dependencies:
       '@types/react': 19.2.5
-
-  '@types/react@19.0.7':
-    dependencies:
-      csstype: 3.2.1
 
   '@types/react@19.2.5':
     dependencies:
@@ -12876,16 +12850,6 @@ snapshots:
       webpack-cli: 6.0.1(webpack-dev-server@5.2.3)(webpack@5.104.1)
     optionalDependencies:
       webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack-cli@6.0.1)(webpack@5.104.1)
-
-  '@xstate/react@6.0.0(@types/react@19.0.7)(react@19.0.0-rc.0)(xstate@5.24.0)':
-    dependencies:
-      react: 19.0.0-rc.0
-      use-isomorphic-layout-effect: 1.2.1(@types/react@19.0.7)(react@19.0.0-rc.0)
-      use-sync-external-store: 1.6.0(react@19.0.0-rc.0)
-    optionalDependencies:
-      xstate: 5.24.0
-    transitivePeerDependencies:
-      - '@types/react'
 
   '@xstate/react@6.0.0(@types/react@19.2.5)(react@19.0.0-rc.0)(xstate@5.24.0)':
     dependencies:
@@ -18112,12 +18076,6 @@ snapshots:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
-  use-isomorphic-layout-effect@1.2.1(@types/react@19.0.7)(react@19.0.0-rc.0):
-    dependencies:
-      react: 19.0.0-rc.0
-    optionalDependencies:
-      '@types/react': 19.0.7
-
   use-isomorphic-layout-effect@1.2.1(@types/react@19.2.5)(react@19.0.0-rc.0):
     dependencies:
       react: 19.0.0-rc.0
@@ -18147,13 +18105,6 @@ snapshots:
   uuid@8.3.2: {}
 
   uuid@9.0.1: {}
-
-  valtio@2.2.0(@types/react@19.0.7)(react@19.0.0-rc.0):
-    dependencies:
-      proxy-compare: 3.0.1
-    optionalDependencies:
-      '@types/react': 19.0.7
-      react: 19.0.0-rc.0
 
   valtio@2.2.0(@types/react@19.2.5)(react@19.0.0-rc.0):
     dependencies:

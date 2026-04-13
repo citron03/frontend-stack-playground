@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactElement } from 'react';
 import { SketchPicker, ColorResult } from 'react-color';
 import { useFloating, autoUpdate, offset, flip, shift } from '@floating-ui/react';
 import * as styles from './index.css';
@@ -10,7 +10,7 @@ export interface ColorPickerProps {
   onChange: (color: ColorResult) => void;
 }
 
-export const ColorPicker = ({ color, onChange }: ColorPickerProps): JSX.Element => {
+export const ColorPicker = ({ color, onChange }: ColorPickerProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [internalColor, setInternalColor] = useState(color);
   const { refs, floatingStyles } = useFloating({

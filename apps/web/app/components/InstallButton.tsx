@@ -2,13 +2,18 @@
 
 import { useEffect, useState } from 'react';
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
+
 export default function InstallButton() {
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
     const handler = (event: Event) => {
       event.preventDefault();
-      setDeferredPrompt(event);
+      setDeferredPrompt(event as BeforeInstallPromptEvent);
     };
     window.addEventListener('beforeinstallprompt', handler);
 
@@ -18,7 +23,7 @@ export default function InstallButton() {
   const installApp = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult: any) => {
+      deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('사용자가 앱을 설치함');
         } else {

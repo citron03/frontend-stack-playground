@@ -3,6 +3,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
+type LegacyMediaQueryList = MediaQueryList & {
+  addListener: (listener: (event: MediaQueryListEvent) => void) => void;
+  removeListener: (listener: (event: MediaQueryListEvent) => void) => void;
+};
 
 type ThemeContextType = {
   theme: Theme;
@@ -77,14 +81,14 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     try {
       mq.addEventListener('change', handler);
     } catch {
-      mq.addListener(handler as any);
+      (mq as LegacyMediaQueryList).addListener(handler);
     }
 
     return () => {
       try {
         mq.removeEventListener('change', handler);
       } catch {
-        mq.removeListener(handler as any);
+        (mq as LegacyMediaQueryList).removeListener(handler);
       }
     };
   }, []);

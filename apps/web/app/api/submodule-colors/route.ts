@@ -1,37 +1,33 @@
 import { NextResponse } from 'next/server';
+import { createRequire } from 'node:module';
 
-import {
-  complementaryColorHex,
-  darkenHex,
-  lightenHex,
-  pasteltoneHex,
-} from '../../../../../vendor/colors-helper-tools/packages/colors-helper-tools/src';
+import { parseColorQuery } from './contract';
 
-type Action = 'pastel' | 'complementary' | 'lighten' | 'darken';
-
-function isHexColor(value: string) {
-  return /^#[0-9a-fA-F]{6}$/.test(value);
-}
+const require = createRequire(import.meta.url);
+const colorsHelper =
+  require('../../../../../vendor/colors-helper-tools/packages/colors-helper-tools/src') as {
+    complementaryColorHex: (hex: string) => string;
+    darkenHex: (hex: string, amount: number) => string;
+    lightenHex: (hex: string, amount: number) => string;
+    pasteltoneHex: () => string;
+  };
 
 export function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const action = searchParams.get('action') as Action | null;
-  const color = searchParams.get('color') ?? '#3b82f6';
+  const parsed = parseColorQuery(searchParams);
 
-  if (!action) {
-    return NextResponse.json({ error: 'action is required' }, { status: 400 });
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  if (action !== 'pastel' && !isHexColor(color)) {
-    return NextResponse.json({ error: 'color must be #RRGGBB format' }, { status: 400 });
-  }
+  const { action, color } = parsed;
 
   let nextColor = color;
 
-  if (action === 'pastel') nextColor = pasteltoneHex();
-  if (action === 'complementary') nextColor = complementaryColorHex(color);
-  if (action === 'lighten') nextColor = lightenHex(color, 0.1);
-  if (action === 'darken') nextColor = darkenHex(color, 0.1);
+  if (action === 'pastel') nextColor = colorsHelper.pasteltoneHex();
+  if (action === 'complementary') nextColor = colorsHelper.complementaryColorHex(color);
+  if (action === 'lighten') nextColor = colorsHelper.lightenHex(color, 0.1);
+  if (action === 'darken') nextColor = colorsHelper.darkenHex(color, 0.1);
 
   return NextResponse.json({ color: nextColor });
 }

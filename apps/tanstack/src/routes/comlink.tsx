@@ -9,23 +9,29 @@ export const Route = createFileRoute('/comlink')({
 // Type-safe Worker wrapper
 class TypedWorker {
   private worker: Worker;
-  private callbacks = new Map<string, (data: any) => void>();
+  private getDataCallback: ((data: string) => void) | null = null;
+  private heavyComputationCallback: ((data: number) => void) | null = null;
 
   constructor(worker: Worker) {
     this.worker = worker;
     this.worker.onmessage = (event: MessageEvent<WorkerResponse>) => {
       const response = event.data;
-      const callback = this.callbacks.get(response.type);
-      if (callback) {
-        callback(response.data);
-        this.callbacks.delete(response.type);
+      if (response.type === 'getData' && this.getDataCallback) {
+        this.getDataCallback(response.data);
+        this.getDataCallback = null;
+        return;
+      }
+
+      if (response.type === 'heavyComputation' && this.heavyComputationCallback) {
+        this.heavyComputationCallback(response.data);
+        this.heavyComputationCallback = null;
       }
     };
   }
 
   async getData(): Promise<string> {
     return new Promise((resolve) => {
-      this.callbacks.set('getData', resolve);
+      this.getDataCallback = resolve;
       const request: WorkerRequest = { type: 'getData' };
       this.worker.postMessage(request);
     });
@@ -33,7 +39,7 @@ class TypedWorker {
 
   async heavyComputation(num: number): Promise<number> {
     return new Promise((resolve) => {
-      this.callbacks.set('heavyComputation', resolve);
+      this.heavyComputationCallback = resolve;
       const request: WorkerRequest = { type: 'heavyComputation', payload: num };
       this.worker.postMessage(request);
     });
