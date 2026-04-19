@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi, Mock } from 'vitest';
+import { vi } from 'vitest';
 import Header from '../components/Header';
 
 // Mock TanStack Router components
@@ -74,5 +74,26 @@ describe('Header', () => {
     // Check that sidebar is hidden
     const sidebar = screen.getByRole('complementary');
     expect(sidebar).toHaveClass('-translate-x-full');
+  });
+
+  it('closes sidebar when start links are clicked', () => {
+    render(<Header />);
+
+    const menuButton = screen.getByRole('button', { name: /open menu/i });
+    fireEvent.click(menuButton);
+
+    const serverFuncsLink = screen.getByText('Start - Server Functions');
+    fireEvent.click(serverFuncsLink);
+
+    const sidebarAfterServerFuncs = screen.getByRole('complementary');
+    expect(sidebarAfterServerFuncs).toHaveClass('-translate-x-full');
+
+    fireEvent.click(menuButton);
+
+    const apiRequestLink = screen.getByText('Start - API Request');
+    fireEvent.click(apiRequestLink);
+
+    const sidebarAfterApiRequest = screen.getByRole('complementary');
+    expect(sidebarAfterApiRequest).toHaveClass('-translate-x-full');
   });
 });
