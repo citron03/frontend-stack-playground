@@ -30,4 +30,9 @@ description: Analyze GitHub PR/MR comments, decide what to adopt or reject with 
 6. Report clearly.
 - Provide a table or bullet summary with `Adopt/Reject/Defer`.
 - Include changed files, validation results, and residual risks.
-- If asked, post a concise PR reply that mirrors the same decisions.
+
+7. Post a PR reply by default after applying changes.
+- Post one concise PR comment summarizing: decision table, applied files, validation outcomes.
+- Prefer GitHub app comment tools first; if unavailable, use `gh pr comment`.
+- If posting fails (for example `403 Resource not accessible by integration`), report the exact failure reason and provide a ready-to-run fallback command for manual posting.
+- Include the posted comment URL when successful.
