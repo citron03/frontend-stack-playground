@@ -12,6 +12,10 @@ node_modules
 
 # testing
 /coverage
+apps/web/e2e/reports/raw/
+apps/web/e2e/reports/test-results/
+apps/web/test-results/
+apps/web/playwright-report/
 
 # next.js
 .next/
@@ -39,3 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+.venv
