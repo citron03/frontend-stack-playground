@@ -8,7 +8,12 @@
 3. 서브모듈 초기화:
    - `git submodule init`
    - `git submodule update`
-4. 실행:
+4. AI/Codex 초기 설정:
+   - `pnpm ai:setup-stack`
+   - `pnpm ai:check-stack`
+   - `pnpm ai:check-config-sync`
+   - 또는 `.claude/commands/first-run-setup.md` 순서 사용
+5. 실행:
    - web: `pnpm web:dev`
    - tanstack: `pnpm tanstack:dev`
    - design-system: `pnpm ds:dev`

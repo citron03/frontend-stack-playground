@@ -28,6 +28,7 @@ dist/
 # misc
 .DS_Store
 *.pem
+.venv/
 
 # debug
 npm-debug.log*

@@ -115,6 +115,7 @@ export default function Header() {
                   StartSSRDemo: !prev.StartSSRDemo,
                 }))
               }
+              aria-label="Toggle Start SSR Demos"
             >
               {groupedExpanded.StartSSRDemo ? (
                 <ChevronDown size={20} />

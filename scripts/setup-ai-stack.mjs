@@ -109,6 +109,50 @@ const multiAgentPolicy = {
   ],
 };
 
+const superpowersProfile = {
+  version: 1,
+  profile: {
+    id: 'codex-superpowers',
+    description: 'Codex 전용 고신뢰 자동화/검증 능력 프로필',
+    mode: 'safe-default',
+  },
+  capabilities: [
+    {
+      id: 'repo-orientation',
+      enabled: true,
+      purpose: '레포 구조 파악 및 변경 범위 최소화',
+      commands: ['rg --files', 'rg', 'find', 'ls', 'cat', 'sed -n'],
+    },
+    {
+      id: 'quality-guard',
+      enabled: true,
+      purpose: '앱 단위 검증 우선 실행',
+      commands: ['pnpm lint', 'pnpm typecheck', 'pnpm test', 'pnpm web:dev', 'pnpm tanstack:dev', 'pnpm ds:dev'],
+    },
+    {
+      id: 'ai-config-parity',
+      enabled: true,
+      purpose: 'Claude/Codex 설정 동기화 및 무결성 점검',
+      commands: ['pnpm ai:setup-stack', 'pnpm ai:sync-config', 'pnpm ai:check-stack', 'pnpm ai:check-config-sync'],
+    },
+    {
+      id: 'first-run-bootstrap',
+      enabled: true,
+      purpose: '최초 실행 환경 준비 표준화',
+      commands: ['pnpm install', 'git submodule sync --recursive', 'git submodule update --init --recursive'],
+    },
+  ],
+  restrictions: [
+    'vendor/** 직접 수정 금지',
+    'patches/** 삭제/무단 수정 금지',
+    '원격 다운로드 명령(curl/wget/http) 정책 커맨드 등록 금지',
+  ],
+  observability: {
+    reportRequired: ['실행한 명령', '실패 원인', '다음 복구 단계'],
+    preferScopedValidation: true,
+  },
+};
+
 function buildAiSettings(projectName, packageManager, appNames) {
   return {
     version: 1,
@@ -148,6 +192,7 @@ function buildAnalysisReport(appNames) {
 - .claude/ai/* 정책 파일 자동 생성
 - sync-ai-config를 통해 .codex/CODEX.md 동기화
 - ai-setup 스킬/커맨드 제공
+- superpowers 프로필(.claude/ai/superpowers.json) 생성
 `;
 }
 
@@ -291,6 +336,8 @@ async function run() {
       writeJson(path.join(aiDir, 'plugins.policy.json'), pluginPolicy)],
     [path.join(aiDir, 'multi-agent.policy.json'), () =>
       writeJson(path.join(aiDir, 'multi-agent.policy.json'), multiAgentPolicy)],
+    [path.join(aiDir, 'superpowers.json'), () =>
+      writeJson(path.join(aiDir, 'superpowers.json'), superpowersProfile)],
     [path.join(aiDir, 'ANALYSIS.md'), () => writeText(path.join(aiDir, 'ANALYSIS.md'), analysisReport)],
   ];
 

@@ -7,6 +7,7 @@
 - `docs/README.md`: 프로젝트 문서 인덱스
 - `docs/PROJECT_CONVENTIONS.md`: 코드/디렉토리/패턴/주석/테스트/리뷰 통일 규약
 - `docs/PROJECT_AUDIT_REPORT.md`: 현재 구조 및 외부 패키지 정밀 분석 보고서
+- `docs/superpowers/README.md`: Codex superpowers 설정/운영 문서
 
 ## 구조
 

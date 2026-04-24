@@ -6,3 +6,7 @@ description: Bootstrap secure AI stack policy (MCP/plugins/multi-agent) and sync
 Run:
 - `pnpm ai:setup-stack`
 - `pnpm ai:check-config-sync`
+- `pnpm ai:check-stack`
+
+Generated:
+- `.claude/ai/superpowers.json` (Codex superpowers profile)
