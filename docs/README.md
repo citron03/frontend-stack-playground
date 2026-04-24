@@ -17,6 +17,7 @@
 - [ONBOARDING.md](./ONBOARDING.md): 신규 참여자 가이드
 - [API_CONTRACTS.md](./API_CONTRACTS.md): 현재 API 계약
 - [AI_SETUP.md](./AI_SETUP.md): Claude/Codex 설정 동기화 가이드
+- [superpowers/README.md](./superpowers/README.md): Codex superpowers 설정/운영 문서 모음
 
 ## 유지보수 규칙
 - 구조/규칙이 바뀌면 `PROJECT_CONVENTIONS.md`를 먼저 갱신한다.
