@@ -9,6 +9,7 @@ description: Securely bootstrap MCP/plugin/multi-agent policy for this monorepo 
    - `.claude/ai/mcp.policy.json`
    - `.claude/ai/plugins.policy.json`
    - `.claude/ai/multi-agent.policy.json`
+   - `.claude/ai/superpowers.json`
    - `.claude/ai/ANALYSIS.md`
 3. Confirm Claude/Codex sync:
    - `pnpm ai:check-config-sync`

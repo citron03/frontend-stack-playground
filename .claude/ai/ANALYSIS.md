@@ -17,3 +17,4 @@
 - .claude/ai/* 정책 파일 자동 생성
 - sync-ai-config를 통해 .codex/CODEX.md 동기화
 - ai-setup 스킬/커맨드 제공
+- superpowers 프로필(.claude/ai/superpowers.json) 생성
