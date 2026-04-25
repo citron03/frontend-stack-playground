@@ -1,4 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# E2E test reports and artifacts
+apps/web/e2e/reports/
+apps/web/e2e/test-results/
 
 # dependencies
 node_modules

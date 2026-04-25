@@ -18,8 +18,8 @@ async function runTcStep(page, step) {
       await page.locator(step.selector).press(step.key);
       return;
     }
-    case 'waitForSelector': {
-      await page.locator(step.selector).waitFor({ state: step.state ?? 'visible' });
+    case 'waitForElement': {
+      await page.waitForSelector(step.selector);
       return;
     }
     case 'expectText': {

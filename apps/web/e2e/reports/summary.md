@@ -1,8 +1,8 @@
 # E2E Error Summary
 
-- Generated: 2026-04-24T13:24:48.004Z
-- Total cases: 1
-- Passed: 1
+- Generated: 2026-04-25T14:33:28.431Z
+- Total cases: 2
+- Passed: 2
 - Failed: 0
 
 ## Error Categories
@@ -13,6 +13,11 @@
 - Assertion errors: 0
 
 ## Cases
+
+### undefined (passed)
+- Name: Home Interaction Test
+- Errors: 0
+- API/Render/Network/Assertion: 0/0/0/0
 
 ### web-home-smoke (passed)
 - Name: Web Home Smoke

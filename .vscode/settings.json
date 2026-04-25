@@ -10,4 +10,6 @@
   "scss.validate": false,
   "stylelint.validate": ["css", "scss", ".module.scss"],
   "stylelint.enable": true,
+  "github.copilot.enable": true,
+  "github.copilot.inlineSuggest.enable": true
 }

@@ -1,0 +1,8 @@
+{
+  "name": "Home Interaction Test",
+  "description": "Test basic home page interactions",
+  "startUrl": "/",
+  "steps": [
+    {"action": "expectVisible", "selector": "body"}
+  ]
+}
