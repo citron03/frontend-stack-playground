@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@citron03/design-system": "workspace:*",
+    "@practice/e2e-testing": "workspace:*",
     "@loadable/component": "catalog:utilities",
     "@mdx-js/loader": "catalog:mdx",
     "@mdx-js/react": "catalog:mdx",

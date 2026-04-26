@@ -2,10 +2,12 @@ const path = require('node:path');
 
 const { test } = require('@playwright/test');
 
-const { attachErrorCollector } = require('./framework/error-collector.cjs');
-const { loadAllTestCases } = require('./framework/load-tc.cjs');
-const { writeRunReport } = require('./framework/report.cjs');
-const { runTcStep } = require('./framework/tc-runner.cjs');
+const {
+  attachErrorCollector,
+  loadAllTestCases,
+  runTcStep,
+  writeRunReport,
+} = require('@practice/e2e-testing');
 
 const tcDir = path.join(__dirname, 'tc');
 const reportRawDir = path.join(__dirname, 'reports', 'raw');

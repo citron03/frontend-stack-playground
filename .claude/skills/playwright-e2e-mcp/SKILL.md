@@ -12,6 +12,9 @@ description: Run TC-based Playwright E2E with categorized runtime error collecti
 3. Start MCP server for browser automation workflows
 - `pnpm --filter web run e2e:mcp`
 
+4. Use shared E2E package API
+- Ensure TC files follow `@practice/e2e-testing` supported actions and schema.
+
 4. Validate report outputs
 - Raw reports: `apps/web/e2e/reports/raw/*.json`
 - Summary: `apps/web/e2e/reports/summary.json`

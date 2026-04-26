@@ -19,6 +19,7 @@
 
 - **앱 위치**: `apps/web`
 - **E2E 위치**: `apps/web/e2e/`
+- **공통 패키지**: `packages/e2e-testing/`에 Playwright/TC/MCP 공통 로직을 저장합니다.
 - **실행 명령**:
   - 브라우저 설치: `pnpm --filter web run e2e:install`
   - E2E 실행: `pnpm --filter web run e2e`
