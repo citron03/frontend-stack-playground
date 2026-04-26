@@ -50,36 +50,31 @@
 - `@playwright/test`가 브라우저를 켜고, 페이지를 조작하며 검증합니다.
 
 ## 3. E2E 디렉토리 구성
-이 레포지토리의 E2E 테스트는 앱별 래퍼 코드와 공통 실행 로직을 분리하여 구성되어 있습니다.
+이 레포지토리의 E2E 테스트는 앱별 테스트 케이스 관리와 공통 실행 로직을 분리하여 구성되어 있습니다.
 
 ### 앱별 E2E 위치
 ```
 apps/web/e2e/
-├── framework/                # 앱 레벨 보완 코드(현재는 공통 패키지와 함께 사용)
-│   ├── error-collector.cjs
-│   ├── load-tc.cjs
-│   ├── report.cjs
-│   └── tc-runner.cjs
-├── global-teardown.cjs       # 테스트 종료 후 정리
+├── global-teardown.cjs       # 테스트 종료 후 집계 리포트 생성
 ├── README.md                 # E2E 간단 설명
 ├── reports/                  # 실행 결과 저장 디렉토리
 ├── tc/                       # JSON 기반 테스트 케이스
 │   └── home-smoke.tc.json    # 기본 스모크 테스트 예시
-└── tc.spec.cjs               # Playwright 테스트 스펙 파일
+└── tc.spec.cjs               # Playwright 테스트 스펙 파일 (@practice/e2e-testing API 사용)
 ```
 
 ### 공통 E2E 패키지 위치
 ```
 packages/e2e-testing/
-├── error-collector.cjs
-├── index.cjs
-├── load-tc.cjs
+├── error-collector.cjs       # 브라우저 에러 수집
+├── index.cjs                 # 공통 API 진입점
+├── load-tc.cjs               # TC JSON 파일 로더
 ├── package.json
-├── playwright-config.cjs
+├── playwright-config.cjs     # Playwright 설정 생성
 ├── README.md
-├── report.cjs
-├── schema.cjs
-└── tc-runner.cjs
+├── report.cjs                # 리포트 생성
+├── schema.cjs                # TC 액션 스키마
+└── tc-runner.cjs             # TC 단계별 실행기
 ```
 
 ### 각 파일 역할
@@ -106,10 +101,12 @@ packages/e2e-testing/
 - `packages/e2e-testing/schema.cjs`
   - 지원하는 TC 액션 목록과 예시를 정의합니다.
 
-## 4. 공유 E2E 패키지 API
-이 프로젝트는 공통 E2E 로직을 `packages/e2e-testing/`에 두고, 앱별 Playwright 설정과 TC 실행은 이 패키지에서 가져와 사용합니다.
+### 왜 packages/ 위치가 최적인가?
+- 다른 앱이 추가되면 동일한 `@practice/e2e-testing` 패키지를 재사용할 수 있습니다.
+- 공통 E2E 로직이 한 곳에 모여 있어 유지보수가 쉽습니다.
+- `pnpm-workspace.yaml`에서 `packages/*` 스코프로 이미 관리 중입니다.
 
-### 주요 API
+## 4. 공유 E2E 패키지 API
 - `createPlaywrightConfig(options)`
   - Playwright 설정 객체를 생성합니다.
   - 옵션: `testDir`, `outputDir`, `baseURL`, `webServerCommand`, `webServerUrl`, `globalTeardown`.
@@ -132,13 +129,18 @@ packages/e2e-testing/
 
 ### 앱에서 쓰는 방법
 - `apps/web/playwright.config.cjs`
-  - `const { createPlaywrightConfig } = require('@practice/e2e-testing');`
+  ```javascript
+  const { createPlaywrightConfig } = require('@practice/e2e-testing');
+  module.exports = createPlaywrightConfig({...});
+  ```
   - 공통 webServer, 보고서, baseURL 설정을 재사용합니다.
 - `apps/web/e2e/tc.spec.cjs`
-  - `const { loadAllTestCases, runTcStep, attachErrorCollector, writeRunReport } = require('@practice/e2e-testing');`
+  ```javascript
+  const { loadAllTestCases, runTcStep, attachErrorCollector, writeRunReport } = require('@practice/e2e-testing');
+  ```
   - TC 파일 로드, 단계 실행, 에러 수집, 리포트 저장을 공통 코드로 처리합니다.
 
-### 장점
+### 구조의 장점
 - 앱별 테스트 실행 로직을 중복 작성하지 않아도 됩니다.
 - TC 스키마와 실행 방식이 중앙에 모여 유지보수가 쉬워집니다.
 - 새로운 앱이 추가되면 동일한 패키지를 재사용하여 E2E 구조를 빠르게 확장할 수 있습니다.
