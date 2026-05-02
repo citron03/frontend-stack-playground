@@ -10,10 +10,11 @@
 ## 2. 테스트 레벨
 - Unit: 함수/훅/컴포넌트 단위
 - Integration: 라우트 단위 상호작용
-- E2E: 현재 필수 아님(필요 시 도입)
+- E2E: `apps/web`는 Playwright TC 기반 E2E 도입 (`pnpm --filter web run e2e`)
 
 ## 3. 앱별 실행 기준
 - `apps/web` 변경: 최소 `pnpm --filter web test`
+- `apps/web` E2E/라우팅 변경: `pnpm --filter web run e2e`
 - `apps/tanstack` 변경: 최소 `pnpm --filter tanstack-temp test`
 - `apps/design-system` 변경: `pnpm --filter @citron03/design-system test`
 - 범위 불명확: 루트 `pnpm test`

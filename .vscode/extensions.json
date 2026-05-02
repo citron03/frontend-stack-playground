@@ -18,6 +18,7 @@
 		"wallabyjs.quokka-vscode",
 		"wallabyjs.console-ninja",
 		"monish.regexsnippets",
-		"pnp.polacode"
+		"pnp.polacode",
+		"GitHub.copilot"
 	]
 }

@@ -1,6 +1,7 @@
 {
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.12.4",
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
@@ -16,6 +17,9 @@
     "web:dev": "pnpm --filter web dev",
     "web:build": "pnpm --filter web build",
     "web:start": "pnpm --filter web start",
+    "web:e2e": "pnpm --filter web run e2e",
+    "web:e2e:install": "pnpm --filter web run e2e:install",
+    "web:e2e:mcp": "pnpm --filter web run e2e:mcp",
     "tanstack": "pnpm --filter tanstack-temp",
     "tanstack:dev": "pnpm --filter tanstack-temp dev",
     "tanstack:build": "pnpm --filter tanstack-temp build",
@@ -110,6 +114,7 @@
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^39.0.1",
     "tui-grid": "*",
+    "turbo": "^2.6.1",
     "typescript": "*",
     "valtio": "*",
     "vite": "*",

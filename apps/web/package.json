@@ -8,9 +8,14 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "e2e:install": "playwright install chromium",
+    "e2e": "playwright test -c playwright.config.cjs",
+    "e2e:mcp": "playwright-mcp"
   },
   "dependencies": {
+    "@citron03/design-system": "workspace:*",
+    "@practice/e2e-testing": "workspace:*",
     "@loadable/component": "catalog:utilities",
     "@mdx-js/loader": "catalog:mdx",
     "@mdx-js/react": "catalog:mdx",
@@ -23,10 +28,11 @@
     "react-dom": "catalog:framework",
     "tui-grid": "4.21.22",
     "valtio": "2.2.0",
-    "xstate": "5.24.0",
-    "@citron03/design-system": "workspace:*"
+    "xstate": "5.24.0"
   },
   "devDependencies": {
+    "@playwright/mcp": "^0.0.70",
+    "@playwright/test": "^1.59.1",
     "@testing-library/jest-dom": "catalog:testing",
     "@testing-library/react": "catalog:testing",
     "@testing-library/user-event": "catalog:testing",
@@ -48,6 +54,7 @@
     "eslint-plugin-react": "catalog:eslint",
     "eslint-plugin-react-hooks": "catalog:eslint",
     "jsdom": "catalog:testing",
+    "playwright": "^1.59.1",
     "prettier": "catalog:style-and-format",
     "typescript": "catalog:types",
     "vitest": "catalog:testing"

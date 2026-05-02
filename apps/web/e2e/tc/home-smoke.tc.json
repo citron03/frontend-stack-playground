@@ -1,0 +1,24 @@
+{
+  "id": "web-home-smoke",
+  "name": "Web Home Smoke",
+  "description": "홈 페이지 렌더링 기본 동작 검증",
+  "startUrl": "/",
+  "tags": ["smoke", "render"],
+  "steps": [
+    {
+      "id": "goto-home",
+      "action": "goto",
+      "url": "/"
+    },
+    {
+      "id": "expect-url-root",
+      "action": "expectUrlContains",
+      "value": "/"
+    },
+    {
+      "id": "expect-body-visible",
+      "action": "expectVisible",
+      "selector": "body"
+    }
+  ]
+}

@@ -17,9 +17,10 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig = {
   /* config options here */
-  reactCompiler: true,
   experimental: {
+    reactCompiler: true,
     externalDir: true,
+    allowedDevOrigins: ['127.0.0.1'],
   },
   // useEffect 두 번 실행 방지
   reactStrictMode: false,

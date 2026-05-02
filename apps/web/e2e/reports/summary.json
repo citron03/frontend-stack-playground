@@ -1,0 +1,67 @@
+{
+  "summary": {
+    "generatedAt": "2026-04-26T07:19:24.191Z",
+    "totalCases": 2,
+    "passedCases": 2,
+    "failedCases": 0,
+    "errorsByCategory": {
+      "api": 0,
+      "render": 1,
+      "network": 1,
+      "assertion": 0
+    }
+  },
+  "reports": [
+    {
+      "tcName": "Home Interaction Test",
+      "startedAt": "2026-04-26T07:19:23.198Z",
+      "endedAt": "2026-04-26T07:19:23.874Z",
+      "status": "passed",
+      "errors": [],
+      "stats": {
+        "total": 0,
+        "byCategory": {
+          "api": 0,
+          "render": 0,
+          "network": 0,
+          "assertion": 0
+        }
+      }
+    },
+    {
+      "tcId": "web-home-smoke",
+      "tcName": "Web Home Smoke",
+      "startedAt": "2026-04-26T07:19:20.494Z",
+      "endedAt": "2026-04-26T07:19:22.811Z",
+      "status": "passed",
+      "errors": [
+        {
+          "category": "network",
+          "message": "Request failed (script): net::ERR_ABORTED",
+          "method": "GET",
+          "url": "http://127.0.0.1:3000/_next/static/chunks/_app-pages-browser_node_modules_pnpm_next_15_5_7__babel_core_7_2_f474db3909d9a83aa34dc8e6fc80-a429af.js",
+          "timestamp": "2026-04-26T07:19:21.336Z",
+          "stepId": "goto-home"
+        },
+        {
+          "category": "render",
+          "message": "A bad HTTP response code (404) was received when fetching the script.",
+          "extra": {
+            "type": "error"
+          },
+          "timestamp": "2026-04-26T07:19:22.332Z",
+          "stepId": "goto-home"
+        }
+      ],
+      "stats": {
+        "total": 2,
+        "byCategory": {
+          "api": 0,
+          "render": 1,
+          "network": 1,
+          "assertion": 0
+        }
+      }
+    }
+  ]
+}

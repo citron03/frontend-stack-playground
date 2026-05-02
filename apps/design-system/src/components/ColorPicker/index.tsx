@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect, type ReactElement } from 'react';
-import { SketchPicker, ColorResult } from 'react-color';
-import { useFloating, autoUpdate, offset, flip, shift } from '@floating-ui/react';
+import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
+import { type ReactElement, useEffect, useState } from 'react';
+import { type ColorResult, SketchPicker } from 'react-color';
+
 import * as styles from './index.css';
 
 export interface ColorPickerProps {
   color: string;
-  onChange: (color: ColorResult) => void;
+  onChange(_newColor: ColorResult): void;
 }
 
 export const ColorPicker = ({ color, onChange }: ColorPickerProps): ReactElement => {
