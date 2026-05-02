@@ -49,3 +49,19 @@ next-env.d.ts
 
 
 .venv
+apps/web/e2e/reports/
+
+# bkit
+.bkit/audit/
+.bkit/checkpoints/
+.bkit/snapshots/
+.bkit/runtime/
+.bkit/state/
+.bkit/decisions/
+
+# Gemini
+.gemini/audit/
+.gemini/tmp/
+# .gemini/context is typically used for local session context, but keep it if you want to share output styles.
+# If you want to ignore it, uncomment the line below:
+# .gemini/context/
