@@ -24,6 +24,39 @@
 - **Turborepo:** JavaScript 및 TypeScript 코드베이스를 위한 고성능 빌드 시스템입니다.
 - **Next.js:** 프로덕션용 React 프레임워크입니다.
 
+## AI Tech Stack
+
+이 프로젝트는 최신 AI 에이전트 도구들을 활용하여 개발 생산성을 극대화하도록 설정되어 있습니다.
+
+- **Gemini CLI:** Google Gemini 기반의 강력한 CLI 에이전트입니다. (`.gemini/`)
+  - **bkit:** PDCA 방법론 기반의 지능형 워크플로우 엔진이 통합되어 있습니다.
+- **Claude Code:** Anthropic의 Claude 3.5 Sonnet 기반 CLI 도구입니다. (`.claude/`)
+  - 프로젝트 전용 분석 정책 및 MCP 도구가 설정되어 있습니다.
+- **Codex:** AI 에이전트 협업을 위한 통합 설정 프레임워크입니다. (`.codex/`)
+  - Superpowers 플러그인을 통한 커스텀 기능 확장을 지원합니다.
+- **GitHub Copilot:** IDE 내 실시간 코드 완성 및 채팅 도구입니다.
+
+### MCP (Model Context Protocol)
+
+AI 에이전트들이 보안 가이드라인을 준수하며 프로젝트 컨텍스트에 안전하게 접근할 수 있도록 전용 MCP 서버가 설정되어 있습니다.
+
+- **Workspace Files (Read-only):** 프로젝트 소스 코드 및 문서에 대한 안전한 조회 권한을 제공합니다.
+- **Git Metadata:** 변경 이력 및 현재 상태를 파악하여 컨텍스트에 맞는 작업을 수행합니다.
+- **Shell Safe-actions:** `rg`, `find` 등 탐색 효율을 높이는 안전한 쉘 명령어를 지원합니다.
+- **Test Execution:** 테스트 도구(Vitest 등)와 연동하여 구현 결과를 즉시 검증합니다.
+
+### AI 관리 스크립트
+
+루트 `package.json`에서 제공하는 AI 관련 유틸리티입니다.
+
+```bash
+# AI 도구 스택 초기 설정 및 점검
+pnpm ai:setup-stack
+
+# 여러 AI 도구 간의 컨텍스트 및 설정 동기화
+pnpm ai:sync-config
+```
+
 ## 시작하기
 
 ### 1. 설치
