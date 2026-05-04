@@ -28,6 +28,9 @@ export class EventBus<Events extends Record<string, any>> {
     const handlers = this.listeners.get(key);
     if (handlers) {
       handlers.delete(handler);
+      if (handlers.size === 0) {
+        this.listeners.delete(key);
+      }
     }
   }
 
