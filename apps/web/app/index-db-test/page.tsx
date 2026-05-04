@@ -1,10 +1,18 @@
 'use client';
 import React, { useState } from 'react';
 
+interface IndexedDbPost {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+}
+
 export default function IndexDbTestPage() {
   const [dbStatus, setDbStatus] = useState('');
   const [added, setAdded] = useState(false);
-  const [fetched, setFetched] = useState<any>(null);
+  const [fetched, setFetched] = useState<IndexedDbPost | null>(null);
 
   // IndexedDB 열기 및 ObjectStore 생성
   const openDb = () => {
@@ -29,7 +37,7 @@ export default function IndexDbTestPage() {
       const db = (event.target as IDBOpenDBRequest).result;
       const transaction = db.transaction(['myObjectStore'], 'readwrite');
       const objectStore = transaction.objectStore('myObjectStore');
-      const data = {
+      const data: IndexedDbPost = {
         id: 1,
         title: 'IndexedDB 블로그 글',
         content: 'IndexedDB는 정말 유용해!',

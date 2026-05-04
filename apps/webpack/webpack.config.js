@@ -55,6 +55,8 @@ module.exports = {
     hot: true,
     open: true, // 서버 시작시 자동으로 브라우저 오픈
     static: { directory: path.resolve(__dirname) }, // 실제 static 파일 위치 (ex. index.html)
+    // HTTPS=true 환경 변수 설정 시 자체 서명 인증서로 HTTPS 서버 실행
+    server: process.env.HTTPS === 'true' ? 'https' : 'http',
   },
 };
 

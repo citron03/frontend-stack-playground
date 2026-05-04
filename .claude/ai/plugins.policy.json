@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "policy": {
+    "installation": "allowlist-only",
+    "authentication": "on-install",
+    "remotePlugins": false
+  },
+  "plugins": [
+    {
+      "id": "repo-workflow",
+      "type": "local-command-pack",
+      "enabled": true,
+      "commands": [
+        "pnpm web:dev",
+        "pnpm tanstack:dev",
+        "pnpm ds:dev",
+        "pnpm typecheck"
+      ],
+      "risk": "low"
+    },
+    {
+      "id": "quality-gates",
+      "type": "local-command-pack",
+      "enabled": true,
+      "commands": [
+        "pnpm lint",
+        "pnpm format",
+        "pnpm stylelint",
+        "pnpm test"
+      ],
+      "risk": "low"
+    },
+    {
+      "id": "ai-config-sync",
+      "type": "local-command-pack",
+      "enabled": true,
+      "commands": [
+        "pnpm ai:sync-config",
+        "pnpm ai:check-config-sync",
+        "pnpm ai:setup-stack"
+      ],
+      "risk": "low"
+    }
+  ]
+}

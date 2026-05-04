@@ -4,17 +4,17 @@ import 'tui-grid/dist/tui-grid.css';
 
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import Grid from 'tui-grid';
-import type { OptGrid, OptRowHeader } from 'tui-grid/types/options';
+import type { OptGrid, OptRow, OptRowHeader } from 'tui-grid/types/options';
 
 export interface TuiGridReactProps {
-  data?: Record<string, any>[]; // 데이터
+  data?: OptRow[]; // 데이터
   columns: { header: string; name: string; width?: number }[]; // 컬럼 정의
   rowHeaders?: OptRowHeader[];
   gridOptions?: Partial<OptGrid>; // 추가 옵션
 }
 
 export interface TuiGridReactRef {
-  reloadData: (newData: Record<string, any>[]) => void; // 데이터 갱신
+  reloadData: (newData: OptRow[]) => void; // 데이터 갱신
   getInstance: () => Grid | null; // 인스턴스 반환
 }
 

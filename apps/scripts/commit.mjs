@@ -1,3 +1,4 @@
+// 실행 환경: Node.js (macOS/Linux/Windows 공통)
 import inquirer from 'inquirer';
 import { $ } from 'zx';
 
