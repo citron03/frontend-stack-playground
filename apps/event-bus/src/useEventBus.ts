@@ -26,7 +26,7 @@ export function useOn<Events extends Record<string, any>, K extends keyof Events
     // 구독 및 cleanup 자동 처리
     const unsubscribe = bus.on(key, callback);
     return () => unsubscribe();
-  }, [bus, key, callback]);
+  }, [bus, key, callback]); // NOTE: callback should be memoized with useCallback to avoid unnecessary re-subscriptions.
 }
 
 /**

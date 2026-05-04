@@ -42,7 +42,13 @@ export class EventBus<Events extends Record<string, any>> {
   emit<Key extends keyof Events>(key: Key, data: Events[Key]) {
     const handlers = this.listeners.get(key);
     if (handlers) {
-      handlers.forEach((handler) => handler(data));
+      handlers.forEach((handler) => {
+        try {
+          handler(data);
+        } catch (error) {
+          console.error(`Error handling event ${String(key)}:`, error);
+        }
+      });
     }
   }
 }
