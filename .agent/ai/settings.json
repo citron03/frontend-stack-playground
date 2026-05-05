@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "project": {
+    "name": "practice-next-15",
+    "packageManager": "pnpm",
+    "monorepo": true,
+    "apps": [
+      "design-system",
+      "scripts",
+      "tanstack",
+      "web",
+      "webpack"
+    ]
+  },
+  "guardrails": {
+    "strictTypeScript": true,
+    "testStrategy": "app-scoped-first",
+    "dependencyPolicy": "no-latest-no-unknown-remote",
+    "docsFirst": [
+      "docs/PROJECT_CONVENTIONS.md",
+      "docs/ARCHITECTURE.md"
+    ]
+  }
+}
