@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "enabled": true,
+  "defaults": {
+    "maxParallelAgents": 2,
+    "allowDelegation": true,
+    "requireDisjointWriteScope": true,
+    "blockingTaskDelegation": false
+  },
+  "roles": [
+    {
+      "id": "explorer",
+      "responsibility": "코드 탐색/원인 파악",
+      "canWrite": false
+    },
+    {
+      "id": "worker",
+      "responsibility": "명확한 파일 범위 구현",
+      "canWrite": true,
+      "restrictions": [
+        "vendor/** 금지",
+        "patches/** 금지"
+      ]
+    }
+  ]
+}
