@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const response = await fetch('http://localhost:3001/api/hello', {
+    const bffBaseUrl = process.env.BFF_BASE_URL || 'http://localhost:3001';
+    const response = await fetch(`${bffBaseUrl}/api/hello`, {
       headers: {
         'Content-Type': 'application/json',
       },

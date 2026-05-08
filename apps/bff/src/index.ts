@@ -5,7 +5,13 @@ import { cors } from 'hono/cors';
 const app = new Hono();
 
 // Middleware
-app.use('/api/*', cors());
+app.use(
+  '/api/*',
+  cors({
+    origin: ['http://localhost:3000'], // Add other origins as needed
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  }),
+);
 
 // Routes
 app.get('/api/health', (c) => {
@@ -23,7 +29,7 @@ app.get('/api/hello', (c) => {
   });
 });
 
-const port = 3001;
+const port = parseInt(process.env.PORT || '3001', 10);
 console.log(`BFF server is running on port ${port}`);
 
 serve({
