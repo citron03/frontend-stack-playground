@@ -5,11 +5,17 @@ import { cors } from 'hono/cors';
 const app = new Hono();
 
 // Middleware
+const allowedOrigins = process.env.BFF_CORS_ORIGIN
+  ? process.env.BFF_CORS_ORIGIN.split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+  : ['http://localhost:3000'];
+
 app.use(
   '/api/*',
   cors({
-    origin: ['http://localhost:3000'], // Add other origins as needed
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: allowedOrigins,
+    allowMethods: ['GET'], // Restrict to the methods currently used by BFF routes
   }),
 );
 

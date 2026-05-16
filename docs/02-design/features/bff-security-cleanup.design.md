@@ -67,6 +67,7 @@
 |----------|---------|----------|---------------|
 | `PORT` | BFF server port | `apps/bff` | `3001` |
 | `BFF_BASE_URL` | BFF API URL | `apps/web` | `http://localhost:3001` |
+| `BFF_CORS_ORIGIN` | Allowed BFF CORS origin(s) | `apps/bff` | `http://localhost:3000` |
 
 ---
 

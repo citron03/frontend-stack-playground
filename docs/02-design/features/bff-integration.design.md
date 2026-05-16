@@ -46,7 +46,7 @@ The BFF will serve as an intermediary between the frontend applications and down
 ## 4. Implementation Details
 - **Directory**: `apps/bff`
 - **Language**: TypeScript
-- **Dependencies**: `hono`, `@hono/node-server`, `zod` (for validation)
+- **Dependencies**: `hono`, `@hono/node-server`
 - **Tooling**: `tsx` for development, `vitest` for testing.
 - **Workspace Integration**: Add `bff` to `package.json` scripts and Turborepo pipeline.
 

@@ -129,6 +129,7 @@ Initial implementation used hardcoded URLs and ports, and wide-open CORS for rap
 |----------|---------|-------|:-------------:|
 | `PORT` | BFF server port | Server (BFF) | ☐ |
 | `BFF_BASE_URL` | BFF API URL | Server (Web) | ☐ |
+| `BFF_CORS_ORIGIN` | Allowed BFF CORS origin(s) | Server (BFF) | ☐ |
 
 ---
 

@@ -2,8 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
+type BFFHelloResponse = {
+  message: string;
+  data: {
+    id: number;
+    name: string;
+    description: string;
+  };
+};
+
 export default function BFFTestPage() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<BFFHelloResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
