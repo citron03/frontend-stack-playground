@@ -17,7 +17,7 @@ export default function BFFTestPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/bff-proxy') // Use the Next.js API proxy
+    fetch('/api/bff-proxy/hello') // Use the Next.js API proxy with specific endpoint
       .then(async (res) => {
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({}));

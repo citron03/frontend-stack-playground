@@ -16,7 +16,13 @@ export async function GET(request: Request) {
     headersToForward.delete('transfer-encoding');
     headersToForward.delete('upgrade');
 
-    const response = await fetch(`${bffBaseUrl}/api/hello`, {
+    const url = new URL(request.url);
+    // /api/bff-proxy/hello -> /api/hello
+    // /api/bff-proxy/health -> /api/health
+    const bffPath = url.pathname.replace('/api/bff-proxy', '/api');
+    const targetUrl = `${bffBaseUrl}${bffPath}${url.search}`;
+
+    const response = await fetch(targetUrl, {
       headers: headersToForward,
     });
 
