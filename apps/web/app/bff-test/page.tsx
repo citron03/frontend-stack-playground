@@ -18,8 +18,11 @@ export default function BFFTestPage() {
 
   useEffect(() => {
     fetch('/api/bff-proxy') // Use the Next.js API proxy
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch from BFF');
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Failed to fetch from BFF');
+        }
         return res.json();
       })
       .then((data) => {

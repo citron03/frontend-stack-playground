@@ -5,11 +5,12 @@ import { cors } from 'hono/cors';
 const app = new Hono();
 
 // Middleware
-const allowedOrigins = process.env.BFF_CORS_ORIGIN
-  ? process.env.BFF_CORS_ORIGIN.split(',')
-      .map((origin) => origin.trim())
-      .filter(Boolean)
-  : ['http://localhost:3000'];
+const allowedOrigins =
+  process.env.BFF_CORS_ORIGIN && process.env.BFF_CORS_ORIGIN.length > 0
+    ? process.env.BFF_CORS_ORIGIN.split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean)
+    : ['http://localhost:3000'];
 
 app.use(
   '/api/*',
