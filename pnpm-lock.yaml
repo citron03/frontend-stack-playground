@@ -266,6 +266,9 @@ importers:
       chalk:
         specifier: '*'
         version: 5.6.2
+      codex-arsenal:
+        specifier: ^0.6.0
+        version: 0.6.0
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -4574,6 +4577,11 @@ packages:
   codepage@1.15.0:
     resolution: {integrity: sha512-3g6NUTPd/YtuuGrhMnOMRjFc+LJw/bnMp3+0r/Wcz3IXUuCosKRJvMphm5+Q+bvTVGcJJuRvVLuYba+WojaFaA==}
     engines: {node: '>=0.8'}
+
+  codex-arsenal@0.6.0:
+    resolution: {integrity: sha512-B09dmZ4TUrdyosI2qc5DnToFiwrwv3WrUUHFFF5Blcver4MADXBqlKUN+fE7Nyj1o/xCzRHYAhhGpZOQJ/Tbng==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -13444,6 +13452,8 @@ snapshots:
   clsx@2.1.1: {}
 
   codepage@1.15.0: {}
+
+  codex-arsenal@0.6.0: {}
 
   collapse-white-space@2.1.0: {}
 
